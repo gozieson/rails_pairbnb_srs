@@ -1,0 +1,52 @@
+<% if !logged_in? %>
+	<h1>Quodit!</h1>
+
+	<p>Click here to look at today's questions!</p>
+	<form method='get' action='/questions'>
+  	  <input type=submit value="Look at Questions">
+  	</form>
+
+	<h2>Login here!</h2>
+	<form method=get action=/sessions>
+	<input type=text placeholder="Email" name="user[email]">
+	<br />
+	<input type=password placeholder="Password" name="user[password]">
+	<br />
+	<input type=submit value="Login">
+	</form>
+
+	<h2>Don't have an account? Create your account here!</h2>
+	<form method=post action=/users>
+	<input type=text placeholder="Email" name="user[email]">
+	<br />
+	<input id="emailcheck" type=text placeholder="Confirm Email" name="user[email]">
+	<br />
+	<input type=password placeholder="Password" name="user[password]">
+	<br />
+	<input id="pwcheck"type=password placeholder="Confirm Password" name="user[password]">
+	<br />
+	<input type=submit value="Sign Up">
+	</form>
+
+<!--How do I put out @notice?-->
+	<p id="error"> <%= @notice %> </p>
+
+<% else %>
+
+	<p> Hi there, </p>
+      <%= current_user.email %>
+  	<p>What would you like to do today?</p>
+
+  	<form method='get' action='/users/:id'>
+  	  <input type=submit value="Go to User Page">
+  	</form>
+
+  	<form method='post' action='/logout'>
+  	  <input type=submit value="Logout">
+  	</form>
+
+	<form method='get' action='/questions'>
+  	  <input type=submit value="Look at Questions">
+  	</form>
+
+<% end %>
