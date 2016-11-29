@@ -10,13 +10,17 @@
     <% Listing.all.each do |l| %>
 
       <% if l.user_id == @user.id %>
+
 	    <%= link_to listing_path(l.id) do %>
-	      <%= l.address %> <br />
-	      <p>Price per Night: <%= l.price %></p>
-	      <br />
+
+	        <ul>
+	          <li><%= l.address %> </li>
+	  		  <li>Price per Night: <%= l.price %> </li>
+	  		  <li>Host: <%= l.user.email %> </li>
+	  		</ul>
+
 	    <% end %>
 	  <% end %>
-
 	<% end %>
 
 <% else %>
@@ -26,13 +30,17 @@
     <% Listing.all.each do |l| %>
 
       <% if l.user_id == @user.id %>
+
 	    <%= link_to listing_path(l.id) do %>
-	      <%= l.address %> <br />
-	      <p>Price per Night: <%= l.price %></p>
-	      <br />
+
+	        <ul>
+	          <li><%= l.address %> </li>
+	  		  <li>Price per Night: <%= l.price %> </li>
+	  		  <li>Host: <%= l.user.email %> </li>
+	  		</ul>
+
 	    <% end %>
 	  <% end %>
-
 	<% end %>
 
 <% end %>
