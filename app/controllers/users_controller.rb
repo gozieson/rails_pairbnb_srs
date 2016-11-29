@@ -5,7 +5,11 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(params[:id])
+		if current_user.id == User.find(params[:id]).id
+			@user = User.find(params[:id])
+		else 
+			redirect_to root_path, notice: "You have no authorization to visit that page!"
+		end
 	end
 
 	def update

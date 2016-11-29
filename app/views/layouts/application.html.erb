@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PairbnbRailsSrsTrial</title>
+  <title>Pairbnb Rails Srs Trial</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -10,10 +10,13 @@
 <body>
   <% if signed_in? %>
       Signed in as: <%= current_user.email %>
-      <%= button_to 'Sign out', sign_out_path, method: :delete %>
+      <%= button_to 'Sign Out', sign_out_path, method: :delete %>
+      <%= link_to "User Page", user_path(current_user.id) %>
   <% else %>
-      <%= link_to 'Sign in', sign_in_path %>
+      <%= link_to 'Sign In', sign_in_path %>
   <% end %>
+
+  <%= link_to 'View Listings', root_path %>
 
   <div id="flash">
       <% flash.each do |key, value| %>
