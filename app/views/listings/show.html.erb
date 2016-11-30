@@ -22,13 +22,15 @@ Price per Night: <%= @listing.price %>
 	  <%= link_to "Delete listing", listing_path(@listing.id), method: :delete, data: { confirm: "Are you sure to delete this listing?" } %>
 
 	  <% Reservation.all.each do |r| %>
-	    <ul>
-	  	  <li>Check in: <%= r.check_in %> </li>
-	  	  <li>Check out: <%= r.check_out %> </li>
-	  	  <li>User Email: <%= link_to user_path(r.user_id) do %>
-  			<%= r.user.email %> <% end %> </li>
-	  	</ul>
-	    <%= link_to "Delete Reservation", listing_reservation_path(r.listing_id, r.id), method: :delete, data: { confirm: "Are you sure to delete this reservation?" } %>
+	    <% if r.listing_id == @listing.id   %>
+	      <ul>
+	  	    <li>Check in: <%= r.check_in %> </li>
+	  	    <li>Check out: <%= r.check_out %> </li>
+	  	    <li>User Email: <%= link_to user_path(r.user_id) do %>
+  			  <%= r.user.email %> <% end %> </li>
+	  	  </ul>
+	      <%= link_to "Delete Reservation", listing_reservation_path(r.listing_id, r.id), method: :delete, data: { confirm: "Are you sure to delete this reservation?" } %>
+	    <% end %>
 	  <% end %>
 	    
   <% else %>
@@ -54,3 +56,5 @@ Price per Night: <%= @listing.price %>
 
   <% end %>
 <% end %>
+
+<!-- To Do: List the user's reservations out in front for better control of own reservations. -->
