@@ -1,3 +1,46 @@
 <%= @user.email %>
-<%= link_to "Edit profile", edit_user_path %>
-<%= link_to "Delete profile", user_path(@user.id), method: :delete, data: { confirm: "Are you sure?" } %>
+
+<% if @user.id == current_user.id %>
+  <%= link_to "Edit profile", edit_user_path %>
+  <%= link_to "Delete profile", user_path(@user.id), method: :delete, data: { confirm: "Are you sure to delete your account?" } %>
+  <%= link_to 'Create Listing', new_listing_path %>
+
+  <h3>Your Listings</h3>
+
+    <% Listing.all.each do |l| %>
+
+      <% if l.user_id == @user.id %>
+
+	    <%= link_to listing_path(l.id) do %>
+
+	        <ul>
+	          <li><%= l.address %> </li>
+	  		  <li>Price per Night: <%= l.price %> </li>
+	  		  <li>Host: <%= l.user.email %> </li>
+	  		</ul>
+
+	    <% end %>
+	  <% end %>
+	<% end %>
+
+<% else %>
+
+  <h3>User Listings</h3>
+
+    <% Listing.all.each do |l| %>
+
+      <% if l.user_id == @user.id %>
+
+	    <%= link_to listing_path(l.id) do %>
+
+	        <ul>
+	          <li><%= l.address %> </li>
+	  		  <li>Price per Night: <%= l.price %> </li>
+	  		  <li>Host: <%= l.user.email %> </li>
+	  		</ul>
+
+	    <% end %>
+	  <% end %>
+	<% end %>
+
+<% end %>

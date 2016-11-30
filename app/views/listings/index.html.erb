@@ -1,0 +1,14 @@
+<h1>PairBnB</h1>
+
+<h3>Here are the listings available:</h3>
+
+<% Listing.all.each do |l| %>
+
+	<%= link_to listing_path(l.id) do %>
+	  <ul>
+	  <li><%= l.address %> </li>
+	  <li>Price per Night: <%= l.price %> </li>
+	  <li>Host: <%= l.user.email %> </li>
+	  </ul>
+	<% end %>
+<% end %>
