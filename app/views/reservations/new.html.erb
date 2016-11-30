@@ -1,0 +1,15 @@
+<h3>New Reservation</h3>
+
+<p>
+Listing ID: <%= @listing.id %> <br />
+Listing Address: <%= @listing.address %> <br />
+Price per Night: <%= @listing.price %>
+</p>
+
+<%= form_for [@listing, @reservation] do |r| %>
+  <label>Check in </label>
+    <input type="date" name="reservation[check_in]"><br />
+  <label>Check out </label>
+    <input type="date" name="reservation[check_out]"><br />
+  <%= r.submit %>
+<% end %>
