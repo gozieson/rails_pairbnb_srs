@@ -14,10 +14,12 @@ Price per Night: <%= @listing.price %>
 <h4>About Listing:</h4>
 <%= @listing.content %> <br />
 
+<% if signed_in? %>
+  <%= link_to "Make a reservation", new_listing_reservation_path(@listing.id) %>
 
-
-<!-- Only shows this if current user matches user show page id -->
-<% if current_user.id == @listing.user_id %>
-  <%= link_to "Edit listing", edit_listing_path %>
-  <%= link_to "Delete listing", listing_path(@listing.id), method: :delete, data: { confirm: "Are you sure to delete this listing?" } %>
+	<!-- Only shows this if current user matches user show page id -->
+	<% if current_user.id == @listing.user_id %>
+	  <%= link_to "Edit listing", edit_listing_path %>
+	  <%= link_to "Delete listing", listing_path(@listing.id), method: :delete, data: { confirm: "Are you sure to delete this listing?" } %>
+	<% end %>
 <% end %>

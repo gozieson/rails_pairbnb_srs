@@ -1,0 +1,23 @@
+<h3>Listing Details:</h3>
+
+<p>
+Listing ID: <%= @reservation.id %> <br />
+Listing Address: <%= @reservation.listing.address %> <br />
+Price per Night: <%= @reservation.listing.price %>
+</p>
+
+<h4>Host:</h4>
+<%= link_to user_path(@listing.user_id) do %>
+  <%= @listing.user.email %>
+<% end %>
+
+<h4>About Listing:</h4>
+<%= @listing.content %> <br />
+
+
+
+<!-- Only shows this if current user matches user show page id -->
+<% if current_user.id == @listing.user_id %>
+  <%= link_to "Edit listing", edit_listing_path %>
+  <%= link_to "Delete listing", listing_path(@listing.id), method: :delete, data: { confirm: "Are you sure to delete this listing?" } %>
+<% end %>

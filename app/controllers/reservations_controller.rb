@@ -2,15 +2,21 @@ class ReservationsController < ApplicationController
 
 	def new
 		@reservation = Reservation.new
+		@listing = Listing.find(params[:listing_id])
 	end
 
 	def create
 
 		@reservation = Reservation.new(reservation_params)
 		@reservation.user_id = current_user.id
+		@reservation.listing_id = params[:listing_id]
 
+		@reservation.calculate_price
+		
 		if @reservation.save
-		  redirect_to @reservation
+		  @listing = Listing.find(params[:listing_id])
+		  byebug	
+		  redirect_to @listing
 		else
 		  #puts "\n\n[LOG] #{user.errors.full_messages}\n\n"
 		  redirect_to root_path, notice: "Invalid form filling!"
@@ -46,6 +52,6 @@ class ReservationsController < ApplicationController
 	private
 
 		def reservation_params
-			params.require(:reservation).permit(:address, :price, :content)
+			params.require(:reservation).permit(:user_id, :listing_id, :check_in, :check_out)
 		end
 end

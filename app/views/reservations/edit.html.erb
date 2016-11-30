@@ -1,0 +1,6 @@
+<%= form_for @reservation do |r| %>
+  Address of Listing: <%= r.text_field :address %> <br />
+  Price per Night: <%= r.number_field :price %> <br />
+  About Listing: <%= r.text_field :content %> <br />
+  <%= r.submit %>
+<% end %>
