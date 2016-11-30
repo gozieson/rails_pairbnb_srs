@@ -14,8 +14,7 @@ class ReservationsController < ApplicationController
 		@reservation.calculate_price
 		
 		if @reservation.save
-		  @listing = Listing.find(params[:listing_id])
-		  byebug	
+		  @listing = Listing.find(params[:listing_id])	
 		  redirect_to @listing
 		else
 		  #puts "\n\n[LOG] #{user.errors.full_messages}\n\n"
@@ -46,7 +45,7 @@ class ReservationsController < ApplicationController
 
 	def destroy
 		Reservation.find(params[:id]).destroy
-		redirect_to root_path
+		redirect_to Listing.find(params[:listing_id])
 	end
 
 	private

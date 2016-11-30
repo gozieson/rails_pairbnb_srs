@@ -14,12 +14,43 @@ Price per Night: <%= @listing.price %>
 <h4>About Listing:</h4>
 <%= @listing.content %> <br />
 
-<% if signed_in? %>
-  <%= link_to "Make a reservation", new_listing_reservation_path(@listing.id) %>
+<!-- If the logged in user is not the one who created the listing, they can only make reservations and alter their own reservations. If the logged in user is the one who created the listing, they can view the email of the user who made the reservation and also delete the reservation that was made by all users. -->
 
-	<!-- Only shows this if current user matches user show page id -->
-	<% if current_user.id == @listing.user_id %>
+<% if signed_in? %>
+  <% if current_user.id == @listing.user_id %>
 	  <%= link_to "Edit listing", edit_listing_path %>
 	  <%= link_to "Delete listing", listing_path(@listing.id), method: :delete, data: { confirm: "Are you sure to delete this listing?" } %>
-	<% end %>
+
+	  <% Reservation.all.each do |r| %>
+	    <ul>
+	  	  <li>Check in: <%= r.check_in %> </li>
+	  	  <li>Check out: <%= r.check_out %> </li>
+	  	  <li>User Email: <%= link_to user_path(r.user_id) do %>
+  			<%= r.user.email %> <% end %> </li>
+	  	</ul>
+	    <%= link_to "Delete Reservation", listing_reservation_path(r.listing_id, r.id), method: :delete, data: { confirm: "Are you sure to delete this reservation?" } %>
+	  <% end %>
+	    
+  <% else %>
+    <%= link_to "Make a reservation", new_listing_reservation_path(@listing.id) %>
+
+    <h4> Current Reservations Made: </h4>
+
+    <% Reservation.all.each do |r| %>
+
+	  <% if @listing.id == r.listing_id %>
+	    <ul>
+	    <li>Check in: <%= r.check_in %> </li>
+	    <li>Check out: <%= r.check_out %> </li>
+	    </ul>
+
+	      <% if current_user.id == r.user_id %>
+	        <%= link_to "Edit Reservation", edit_listing_reservation_path(r.listing_id, r.id) %>
+	        <%= link_to "Delete Reservation", listing_reservation_path(r.listing_id, r.id), method: :delete, data: { confirm: "Are you sure to delete this reservation?" } %>
+	      <% end %>
+
+	  <% end %>
+    <% end %>
+
+  <% end %>
 <% end %>
