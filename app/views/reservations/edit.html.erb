@@ -1,6 +1,21 @@
-<%= form_for @reservation do |r| %>
-  Address of Listing: <%= r.text_field :address %> <br />
-  Price per Night: <%= r.number_field :price %> <br />
-  About Listing: <%= r.text_field :content %> <br />
+<p>
+Listing ID: <%= @listing.id %> <br />
+Listing Address: <%= @listing.address %> <br />
+Price per Night: <%= @listing.price %>
+</p>
+
+<ul>
+  <li>Current Check in: <%= @reservation.check_in %> </li>
+  <li>Current Check out: <%= @reservation.check_out %> </li>
+  <li>Current Total Price: <%= @reservation.total_cost %> </li>
+</ul>
+
+<%= form_for [@listing, @reservation] do |r| %>
+  
+  <label>New Check in </label>
+    <input value="<%= @reservation.check_in %>" type="date" name="reservation[check_in]"><br />
+  <label>New Check out </label>
+    <input value="<%= @reservation.check_out %>" type="date" name="reservation[check_out]"><br />
   <%= r.submit %>
+
 <% end %>

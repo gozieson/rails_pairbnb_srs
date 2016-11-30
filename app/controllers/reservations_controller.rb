@@ -29,6 +29,7 @@ class ReservationsController < ApplicationController
 	def edit
 		if current_user.id == Reservation.find(params[:id]).user_id
 			@reservation = Reservation.find(params[:id])
+			@listing = Listing.find(params[:listing_id])
 		else 
 			redirect_to root_path, notice: "You have no authorization to visit that page!"
 		end
@@ -36,8 +37,10 @@ class ReservationsController < ApplicationController
 
 	def update
 		@reservation = Reservation.find(params[:id])
+		@reservation.calculate_price
+
 		if @reservation.update(reservation_params)
-			redirect_to @reservation
+			redirect_to Listing.find(params[:listing_id])
 		else
 			render 'edit'
 		end

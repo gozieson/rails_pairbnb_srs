@@ -15,7 +15,6 @@ Price per Night: <%= @reservation.listing.price %>
 <%= @listing.content %> <br />
 
 
-
 <!-- Only shows this if current user matches user show page id -->
 <% if current_user.id == @listing.user_id %>
   <%= link_to "Edit listing", edit_listing_path %>
