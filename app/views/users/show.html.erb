@@ -1,3 +1,8 @@
+<div id="profile">
+  <%= image_tag @user.image.url %>
+</div>
+
+
 <%= @user.email %>
 
 <% if @user.id == current_user.id %>

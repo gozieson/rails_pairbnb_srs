@@ -2,6 +2,11 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		# @image = MiniMagick::Image.open(@user.image.to_s)
+		# @image = @image.path #=> "/var/folders/k7/6zx6dx6x7ys3rv3srh0nyfj00000gn/T/magick20140921-75881-1yho3zc.jpg"
+		# @image = @image.resize "300x300"
+		# @image = @image.format "png"
+		# @image = @image.write "output.png"
 	end
 
 	def edit
@@ -29,6 +34,6 @@ class UsersController < ApplicationController
 	private
 
 		def user_params
-			params.require(:user).permit(:email)
+			params.require(:user).permit(:email, :image)
 		end
 end
