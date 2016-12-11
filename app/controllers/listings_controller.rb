@@ -19,6 +19,7 @@ class ListingsController < ApplicationController
 
 	def show
 		@listing = Listing.find(params[:id])
+
 	end
 
 	def edit
@@ -31,6 +32,7 @@ class ListingsController < ApplicationController
 
 	def update
 		@listing = Listing.find(params[:id])
+
 		if @listing.update(listing_params)
 			redirect_to @listing
 		else
@@ -46,6 +48,6 @@ class ListingsController < ApplicationController
 	private
 
 		def listing_params
-			params.require(:listing).permit(:address, :price, :content)
+			params.require(:listing).permit(:address, :price, :content, {tours: []})
 		end
 end

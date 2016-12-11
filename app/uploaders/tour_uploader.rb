@@ -23,7 +23,7 @@ class TourUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process scale: [800, 1200]
+  process resize_to_fill: [800, 800]
   #
   # def scale(width, height)
   #   # do something
@@ -31,7 +31,7 @@ class TourUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process resize_to_fit: [200, 300]
+    process resize_to_fit: [200, 200]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

@@ -4,6 +4,6 @@
   Address of Listing: <%= l.text_field :address %> <br />
   Price per Night: <%= l.number_field :price %> <br />
   About Listing: <%= l.text_field :content %> <br />
-  Listing Pictures: <%= form.file_field :tours, multiple: true %>
+  Listing Pictures: <%= l.file_field :tours, multiple: true %>
   <%= l.submit %>
 <% end %>
